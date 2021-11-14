@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id              Int @id @default(autoincrement())
+  username        String @map(name: "username")
+  fullName        String @map(name: "full_name")
+  hashedPassword  String @map(name: "hashed_password")
+}
+
+model Agent {
+  id              Int @id @default(autoincrement())
+  username        String @map(name: "username")
+  fullName        String @map(name: "full_name")
+  icNumber        String @map(name: "ic_number")
+  hashedPassword  String @map(name: "hashed_password")
+  contactNumber   Int @map(name: "contact_number") @default(0123456789)
+  suspended       Boolean @map(name: "suspended") @default(false)
+  approved        Boolean @map(name: "approved") @default(false)
+  Donor           Donor[]
+  Transaction     Transaction[]
+}
+
+
+model Donor {
+  id              Int @id @default(autoincrement())
+  createdAt       DateTime @default(now()) @map(name: "created_at")
+  isCompany       Boolean @map(name: "company")
+	name            String @map(name: "name")
+  registrationNo  String? @map(name: "registration_no")
+  icNumber        String? @map(name: "ic_number")
+  contactPerson   String? @map(name: "contact_person")
+  contactNumber   Int @map(name: "contact_number")
+  email           String @map(name: "email")
+  address         String @map(name: "address")
+  expiryDate      DateTime @map(name: "expiry_date")
+  status          Model_Status @default(PENDING) @map(name: "status")
+  agent           Agent @relation(fields:[agentId], references: [id])
+  agentId         Int
+  Transaction     Transaction[]
+}
+
+enum Model_Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Transaction {
+  id                  Int @id @default(autoincrement())
+  receiptMainCompany  String? @map(name: "receipt_main_company")
+  amount              Int @map(name: "amount")
+  chequeNo            String? @map(name: "cheque_no")
+  chequeDate          DateTime? @map(name: "cheque_date")
+  bankName            String? @map(name: "bank_name")
+  paymentType         Transaction_PaymentType? @map(name: "payment_type") 
+  status              Transaction_Status @default(PENDING) @map(name: "status")
+  donor               Donor @relation(fields: [donorId], references: [id])
+  donorId             Int
+  agent               Agent @relation(fields: [agentId], references: [id])
+  agentId             Int
+}
+
+enum Transaction_PaymentType {
+  CHEQUE
+  ONLINE_TRANSFER
+}
+
+enum Transaction_Status {
+  PENDING
+  COMPLETED
+  REJECTED
+  APPROVED
+}
