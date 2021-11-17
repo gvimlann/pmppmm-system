@@ -53,6 +53,7 @@ enum Model_Status {
   PENDING
   APPROVED
   REJECTED
+  EXPIRED
 }
 
 model Transaction {
