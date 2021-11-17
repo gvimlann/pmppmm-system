@@ -64,7 +64,16 @@ export const createDonor = async (req, res) => {
 			//   TODO: add another line to check if the donor is active or not
 			donorExist = await prisma.donor.findMany({
 				where: {
-					registrationNo: registrationNo,
+					AND: [
+						{
+							registrationNo: registrationNo,
+						},
+						{
+							status: {
+								not: 'EXPIRED',
+							},
+						},
+					],
 				},
 			});
 		} else {
