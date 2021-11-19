@@ -40,7 +40,7 @@ export default function AdminTransaction() {
     });
     try {
       const { data } = await axios.post("/transaction/admin/update", {
-        tid: selectedTransaction.id,
+        id: selectedTransaction.id,
         status: "APPROVED",
       });
       console.log(data);
@@ -58,7 +58,7 @@ export default function AdminTransaction() {
 
     try {
       const { data } = await axios.post("/transaction/admin/update", {
-        tid: selectedTransaction.id,
+        id: selectedTransaction.id,
         status: "REJECTED",
       });
       console.log(data);

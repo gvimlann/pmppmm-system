@@ -111,15 +111,22 @@ export default function AdminTransactionTable({
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {transaction.status === "COMPLETED" ? (
+                      {transaction.status === "EXPIRED" && (
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {transaction.status}
                         </span>
-                      ) : (
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                      )}
+                      {transaction.status === "COMPLETED" && (
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {transaction.status}
                         </span>
                       )}
+                      {transaction.status !== "EXPIRED" &&
+                        transaction.status !== "COMPLETED" && (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                            {transaction.status}
+                          </span>
+                        )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminRoute from "../../components/Admin.Route";
-import AdminAgentTable from "../../components/agent/Admin.AgentTable";
+import AdminAgentTable from "../../components/admin/Admin.AgentTable";
 
 function AdminAgent() {
   const [agentList, setAgentList] = useState([]);
@@ -20,8 +20,8 @@ function AdminAgent() {
 
   return (
     <AdminRoute>
-      <div>Agent List</div>
-      <pre>{JSON.stringify(agentList, null, 4)}</pre>
+      {/* <div>Agent List</div> */}
+      {/* <pre>{JSON.stringify(agentList, null, 4)}</pre> */}
       <AdminAgentTable agentList={agentList} />
     </AdminRoute>
   );

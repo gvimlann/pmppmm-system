@@ -27,6 +27,12 @@ export default function AgentDonorTable({ donorsList }) {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
+                    Contact Number
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
                     Address
                   </th>
                   <th
@@ -63,6 +69,11 @@ export default function AgentDonorTable({ donorsList }) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
+                        {donor.contactNumber}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
                         {donor.address}
                       </div>
                     </td>
@@ -72,15 +83,22 @@ export default function AgentDonorTable({ donorsList }) {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {donor.status === "APPROVED" ? (
+                      {donor.status === "APPROVED" && (
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           {donor.status}
                         </span>
-                      ) : (
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                      )}{" "}
+                      {donor.status === "EXPIRED" && (
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                           {donor.status}
                         </span>
                       )}
+                      {donor.status !== "APPROVED" &&
+                        donor.status !== "EXPIRED" && (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                            {donor.status}
+                          </span>
+                        )}
                     </td>
                     {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{donor.status}
