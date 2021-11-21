@@ -11,10 +11,10 @@ import {
 
 import { requireSignIn } from '../middlewares/index';
 
-router.post('/donor/get', getDonor);
-router.post('/donor/create', createDonor);
-router.post('/donor/update', updateDonor);
-router.post('/donor/delete', deleteDonor);
-router.post('/donor/validate', validateDonor);
+router.post('/donor/get', requireSignIn, getDonor);
+router.post('/donor/create', requireSignIn, createDonor);
+router.post('/donor/update', requireSignIn, updateDonor);
+router.post('/donor/delete', requireSignIn, deleteDonor);
+router.post('/donor/validate', requireSignIn, validateDonor);
 
 module.exports = router;

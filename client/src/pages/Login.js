@@ -18,10 +18,10 @@ function Login() {
 	const submitFormData = async (e) => {
 		e.preventDefault();
 		try {
-			const res = await axios.post('/auth/login', {});
+			const res = await axios.post('/auth/agent/login', formData);
 			console.log(res);
 			// window.localStorage.setItem('user', JSON.stringify(res.data));
-			// history.push('/');
+			history.push('/');
 		} catch (err) {
 			console.log(err);
 		}

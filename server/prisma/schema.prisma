@@ -19,6 +19,7 @@ model Admin {
 
 model Agent {
   id              Int @id @default(autoincrement())
+  email           String @map(name: "email")
   username        String @map(name: "username")
   fullName        String @map(name: "full_name")
   icNumber        String @map(name: "ic_number")
