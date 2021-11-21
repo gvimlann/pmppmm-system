@@ -12,7 +12,7 @@ function Transaction() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const { data } = await axios.post("/transaction/get", { agentId: 1 });
+        const { data } = await axios.post("/transaction/get");
         setTransactionList(data.allTransactions);
       } catch (err) {
         console.log(err);
@@ -80,7 +80,7 @@ function Transaction() {
 
   return (
     <AgentRoute>
-      <div className="px-4 py-3 text-right sm:px-6"></div>
+      <div className='px-4 py-3 text-right sm:px-6'></div>
       <TransactionTable transactionList={transactionList} />
       {/* <input type="file" onChange={onFileChange} />
 			<button className="bg-gray-300 p-5" onClick={onFileUpload}>

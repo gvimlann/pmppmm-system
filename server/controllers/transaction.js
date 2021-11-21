@@ -16,7 +16,7 @@ const S3 = new AWS.S3(awsConfig);
 
 export const getTransaction = async (req, res) => {
   try {
-    const { agentId } = req.body;
+    const agentId = req.user.id;
     async function main() {
       const allTransactions = await prisma.transaction.findMany({
         select: {
