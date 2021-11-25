@@ -9,6 +9,7 @@ import AdminAgent from "./pages/admin/Admin.Agent";
 import AdminTransaction from "./pages/admin/Admin.Transaction";
 import { Provider } from "./context";
 import AdminDonor from "./pages/admin/Admin.Donor";
+import AgentRegister from "./pages/agent/Agent.Register";
 
 function App() {
   // axios.defaults.baseURL = "http://localhost:5001/api";
@@ -40,6 +41,9 @@ function App() {
               <Switch>
                 <Route exact path='/'>
                   <Login />
+                </Route>
+                <Route exact path='/register'>
+                  <AgentRegister />
                 </Route>
                 <Route exact path='/agent/donor'>
                   <AgentDonor />
