@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import AgentRoute from "../../components/Agent.Route";
 import AgentDonorTable from "../../components/agent/Agent.DonorTable";
+import { Context } from "../../context";
+
 function Donor() {
+  const { state } = useContext(Context);
   const [donorsList, setDonorsList] = useState([]);
+  const [error, setError] = useState("");
 
   const fetchDonors = async () => {
     try {
@@ -16,14 +20,37 @@ function Donor() {
     }
   };
 
+  const updateUI = () => {
+    if (state.user && state.user.status === "SUSPENDED") {
+      setError(
+        "Your account has been suspended. Please contact admin to resolve it."
+      );
+    } else {
+      setError("");
+    }
+  };
+
   useEffect(() => {
     fetchDonors();
   }, []);
 
+  useEffect(() => {
+    updateUI();
+  }, [state, error]);
+
   return (
     <div>
       <AgentRoute>
-        <div className='px-4 py-3 text-right sm:px-6'>
+        <div
+          className={`px-4 py-3 text-right sm:px-6 ${
+            error.length > 0 && "is-disabled"
+          }`}
+        >
+          {error !== "" && (
+            <div className='mb-6 px-4 py-2 text-left  bg-red-200 rounded-md text-sm font-semibold'>
+              {error}
+            </div>
+          )}
           <Link to='/agent/add-donor'>
             <button
               type='button'
@@ -33,7 +60,7 @@ function Donor() {
             </button>
           </Link>
         </div>
-        <AgentDonorTable donorsList={donorsList} />
+        <AgentDonorTable disabled={error.length > 0} donorsList={donorsList} />
       </AgentRoute>
     </div>
   );

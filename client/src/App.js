@@ -8,11 +8,13 @@ import Login from "./pages/Login";
 import AdminAgent from "./pages/admin/Admin.Agent";
 import AdminTransaction from "./pages/admin/Admin.Transaction";
 import { Provider } from "./context";
+import AdminDonor from "./pages/admin/Admin.Donor";
 
 function App() {
   // axios.defaults.baseURL = "http://localhost:5001/api";
   axios.defaults.baseURL = "/api";
   // axios.defaults.withCredentials = true;
+
   return (
     <div>
       <header>
@@ -36,7 +38,7 @@ function App() {
               {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
               <Switch>
-                <Route exact path='/login'>
+                <Route exact path='/'>
                   <Login />
                 </Route>
                 <Route exact path='/agent/donor'>
@@ -53,6 +55,9 @@ function App() {
                 </Route>
                 <Route exact path='/admin/agent'>
                   <AdminAgent />
+                </Route>
+                <Route exact path='/admin/donor'>
+                  <AdminDonor />
                 </Route>
                 <Route exact path='/admin/transaction'>
                   <AdminTransaction />

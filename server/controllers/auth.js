@@ -59,6 +59,8 @@ export const login = async (req, res) => {
     if (!email) return res.status(400).send("Email is required");
     if (!password) return res.status(400).send("Password is required");
 
+    console.log(await hashPassword(password));
+
     if (accountType === "agent") {
       const userExist = await prisma.agent.findFirst({
         where: {
@@ -70,6 +72,12 @@ export const login = async (req, res) => {
 
       if (match !== true) {
         return res.status(400).send("Cant find the agent");
+      } else if (userExist.approved === false) {
+        return res
+          .status(400)
+          .send(
+            "Your account is still pending approval from the admin. Please try again later."
+          );
       }
 
       const token = jwt.sign(
@@ -97,7 +105,7 @@ export const login = async (req, res) => {
       const match = await comparePassword(password, userExist.hashedPassword);
 
       if (match !== true) {
-        return res.status(400).send("Cant find the agent");
+        return res.status(400).send("Cant find the admin");
       }
 
       const token = jwt.sign(
@@ -146,7 +154,16 @@ export const agentLogout = async (req, res) => {
 export const currentUser = async (req, res) => {
   async function main() {
     console.log(req.user);
-    return res.json({ success: true, user: req.user });
+    const user = await prisma.agent.findFirst({
+      where: {
+        id: req.user.id,
+      },
+    });
+
+    return res.json({
+      success: true,
+      user: { id: req.user.id, status: user.status, role: "AGENT" },
+    });
   }
 
   main()
@@ -154,6 +171,6 @@ export const currentUser = async (req, res) => {
       console.log(e);
     })
     .finally(async () => {
-      //   await prisma.disconnect();
+      await prisma.disconnect();
     });
 };

@@ -34,15 +34,15 @@ export default function AgentRoute({ children }) {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
+    { name: "Your Profile", href: "" },
+    { name: "Settings", href: "" },
     {
       name: "Sign out",
-      href: "#",
+      href: "",
       logout: () => {
         try {
           axios.get("/auth/logout");
-          history.push("/login");
+          history.push("/");
         } catch (err) {
           console.log(err);
         }

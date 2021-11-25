@@ -33,7 +33,8 @@ const Provider = ({ children }) => {
         payload: data.user,
       });
     } catch (err) {
-      console.log(err.response.status);
+      // console.log(err.response.status);
+      console.log(err);
     }
   };
 
@@ -53,7 +54,7 @@ const Provider = ({ children }) => {
             .get("/auth/logout")
             .then((data) => {
               console.log("401 error -> logout");
-              history.push("/login");
+              history.push("/");
             })
             .catch((err) => {
               console.log("axios interceptors error: ", err);

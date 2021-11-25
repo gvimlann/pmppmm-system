@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function AgentDonorTable({ donorsList }) {
+export default function AgentDonorTable({ donorsList, disabled }) {
   // const [donors] = useState([]);
   return (
     <div className='flex flex-col'>
@@ -40,12 +40,12 @@ export default function AgentDonorTable({ donorsList }) {
                   >
                     Expiry Date
                   </th>
-                  <th
+                  {/* <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                   >
                     Status
-                  </th>
+                  </th> */}
                   <th
                     scope='col'
                     className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
@@ -81,7 +81,7 @@ export default function AgentDonorTable({ donorsList }) {
                         {donor.expiryDate}
                       </div>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
+                    {/* <td className='px-6 py-4 whitespace-nowrap'>
                       {donor.status === "APPROVED" && (
                         <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
                           {donor.status}
@@ -98,19 +98,21 @@ export default function AgentDonorTable({ donorsList }) {
                             {donor.status}
                           </span>
                         )}
-                    </td>
+                    </td> */}
                     {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{donor.status}
 										</td> */}
-                    {donor.status === "APPROVED" && (
-                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                    {/* {donor.status === "APPROVED" && ( */}
+                    <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                      {!disabled && (
                         <Link to={`/agent/add-transaction/${donor.id}`}>
-                          <span className='text-indigo-600 hover:text-indigo-900'>
+                          <button className='text-indigo-600 font-semibold hover:text-indigo-900'>
                             Add Transaction
-                          </span>
+                          </button>
                         </Link>
-                      </td>
-                    )}
+                      )}
+                    </td>
+                    {/* )} */}
                   </tr>
                 ))}
               </tbody>

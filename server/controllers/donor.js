@@ -1,6 +1,25 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+export const getAdminDonor = async (req, res) => {
+  async function main() {
+    // ... you will write your Prisma Client queries here
+    const allDonors = await prisma.donor.findMany();
+    // console.log(allDonors);
+    res.json({ allDonors });
+  }
+
+  main()
+    .catch((e) => {
+      console.log("It is an error");
+      console.log(e);
+      throw e;
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
+};
+
 export const getDonor = async (req, res) => {
   async function main() {
     // ... you will write your Prisma Client queries here

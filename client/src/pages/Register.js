@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 // import { Context } from '../context';
 
-function Login() {
+function Register() {
   const history = useHistory();
 
   const [error, setError] = useState("");

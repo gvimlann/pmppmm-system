@@ -2,27 +2,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminRoute from "../../components/Admin.Route";
 import AdminAgentTable from "../../components/admin/Admin.AgentTable";
-import AdminAgentPopupModal from "../../components/admin/Admin.AgentPopupModal";
+import AdminDonorTable from "../../components/admin/Admin.DonorTable";
 
-function AdminAgent() {
-  const [agentList, setAgentList] = useState([]);
-  const fetchAgents = async () => {
+function AdminDonor() {
+  const [donorList, setDonorList] = useState([]);
+  const fetchDonors = async () => {
     try {
-      const { data } = await axios.get("/agent/get");
-      setAgentList(data.allAgents);
+      const { data } = await axios.get("/donor/admin/get");
+      console.log(data);
+      setDonorList(data.allDonors);
       // console.log(data.allAgents);
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    fetchAgents();
+    fetchDonors();
   }, []);
 
   const openEditModal = async (id) => {
     console.log("Modal opened");
     setOpenModal(true);
-    const selectedAgent = agentList.find((item) => {
+    const selectedAgent = donorList.find((item) => {
       return item.id === id;
     });
 
@@ -30,7 +31,7 @@ function AdminAgent() {
   };
 
   const agentApproved = async (id) => {
-    const selectedAgent = agentList.find((item) => {
+    const selectedAgent = donorList.find((item) => {
       return item.id === id;
     });
     // console.log(selectedAgent);
@@ -40,7 +41,7 @@ function AdminAgent() {
         approved: true,
       });
       console.log(data);
-      fetchAgents();
+      fetchDonors();
     } catch (err) {
       console.log(err);
     }
@@ -48,14 +49,14 @@ function AdminAgent() {
 
   const agentRejected = async (id) => {
     console.log("Transaction rejected: ", id);
-    const selectedAgent = agentList.find((item) => {
+    const selectedDonor = donorList.find((item) => {
       return item.id === id;
     });
 
     try {
       const { data } = await axios.post("/agent/update", formData);
       console.log(data);
-      fetchAgents();
+      fetchDonors();
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +79,7 @@ function AdminAgent() {
     e.preventDefault();
     try {
       await axios.post("/agent/update", formData);
-      fetchAgents();
+      fetchDonors();
     } catch (err) {
       console.log(err);
     }
@@ -98,32 +99,16 @@ function AdminAgent() {
   };
 
   const [openModal, setOpenModal] = useState(false);
-
   return (
     <AdminRoute>
-      {/* <div>Agent List</div> */}
-      {/* <pre>{JSON.stringify(agentList, null, 4)}</pre> */}
-      <AdminAgentTable
-        agentList={agentList}
+      <AdminDonorTable
+        donorList={donorList}
         openEditModal={openEditModal}
         agentApproved={agentApproved}
         agentRejected={agentRejected}
-      />
-      <AdminAgentPopupModal
-        title='Edit'
-        content='Edit Data'
-        successText='Submit'
-        cancelText='Cancel'
-        successHandle={successHandle}
-        cancelHandle={cancelHandle}
-        openModal={openModal}
-        handleChange={handleChange}
-        formSubmitHandle={formSubmitHandle}
-        formData={formData}
-        setDate={setDate}
       />
     </AdminRoute>
   );
 }
 
-export default AdminAgent;
+export default AdminDonor;

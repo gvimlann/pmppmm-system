@@ -77,7 +77,7 @@ function AgentAddDonor() {
         agentId: 1,
       });
       if (data.success) {
-        history.push("/");
+        history.push("/agent/donor");
       }
       console.log(data);
     } catch (err) {
@@ -87,110 +87,110 @@ function AgentAddDonor() {
 
   return (
     <AgentRoute>
-      <div className="mt-10 sm:mt-0">
-        <div className="col-span-2 sm:col-span-2 mb-2">
-          <label className="inline-flex items-center">
+      <div className='mt-10 sm:mt-0'>
+        <div className='col-span-2 sm:col-span-2 mb-2'>
+          <label className='inline-flex items-center'>
             <input
-              name="isCompany"
+              name='isCompany'
               onChange={updateCompanyCheckbox}
               defaultChecked={isCompany}
-              className="text-indigo-500 w-6 h-6 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-              type="checkbox"
+              className='text-indigo-500 w-6 h-6 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded'
+              type='checkbox'
             />
             Tick Here If Donor Is A Company
           </label>
         </div>
 
-        <div className="mt-5 md:mt-0 md:col-span-2">
-          <form onSubmit={handleFormSubmit} action="#" method="POST">
-            <div className="shadow overflow-hidden sm:rounded-md">
-              <div className="px-4 py-5 bg-white sm:p-6">
+        <div className='mt-5 md:mt-0 md:col-span-2'>
+          <form onSubmit={handleFormSubmit} action='#' method='POST'>
+            <div className='shadow overflow-hidden sm:rounded-md'>
+              <div className='px-4 py-5 bg-white sm:p-6'>
                 {error !== "" && (
-                  <div className="px-4 py-2 bg-red-200 rounded-md text-sm font-semibold">
+                  <div className='px-4 py-2 bg-red-200 rounded-md text-sm font-semibold'>
                     {error}
                   </div>
                 )}
 
                 {isCompany ? (
-                  <div className="px-4 py-5 bg-white sm:p-6">
-                    <div className="grid grid-cols-6 gap-6">
-                      <div className="col-span-6 sm:col-span-6">
+                  <div className='px-4 py-5 bg-white sm:p-6'>
+                    <div className='grid grid-cols-6 gap-6'>
+                      <div className='col-span-6 sm:col-span-6'>
                         <label
-                          htmlFor="company-name"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='company-name'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Company Name
                         </label>
                         <input
-                          type="text"
-                          name="name"
-                          id="company-name"
+                          type='text'
+                          name='name'
+                          id='company-name'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="registration-no"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='registration-no'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Registration No
                         </label>
                         <input
-                          type="text"
-                          name="registrationNo"
-                          id="registration-no"
+                          type='text'
+                          name='registrationNo'
+                          id='registration-no'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="email"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='email'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Email Address
                         </label>
                         <input
-                          type="text"
-                          name="email"
-                          id="email"
+                          type='text'
+                          name='email'
+                          id='email'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="contact-person"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='contact-person'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Contact Person
                         </label>
                         <input
-                          type="text"
-                          name="contactPerson"
-                          id="contact-person"
+                          type='text'
+                          name='contactPerson'
+                          id='contact-person'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="contact-number"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='contact-number'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Contact Number
                         </label>
                         <input
-                          type="number"
-                          name="contactNumber"
-                          id="contact-number"
+                          type='number'
+                          name='contactNumber'
+                          id='contact-number'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
@@ -211,19 +211,19 @@ function AgentAddDonor() {
 											</select>
 										</div> */}
 
-                      <div className="col-span-6">
+                      <div className='col-span-6'>
                         <label
-                          htmlFor="company-address"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='company-address'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Company Address
                         </label>
                         <input
-                          type="text"
-                          name="address"
-                          id="company-address"
+                          type='text'
+                          name='address'
+                          id='company-address'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
@@ -274,53 +274,53 @@ function AgentAddDonor() {
                     </div>
                   </div>
                 ) : (
-                  <div className="px-4 py-5 bg-white sm:p-6">
-                    <div className="grid grid-cols-6 gap-6">
-                      <div className="col-span-6 sm:col-span-6">
+                  <div className='px-4 py-5 bg-white sm:p-6'>
+                    <div className='grid grid-cols-6 gap-6'>
+                      <div className='col-span-6 sm:col-span-6'>
                         <label
-                          htmlFor="person-name"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='person-name'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Person Name
                         </label>
                         <input
-                          type="text"
-                          name="name"
-                          id="person-name"
+                          type='text'
+                          name='name'
+                          id='person-name'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="ic-number"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='ic-number'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           IC No
                         </label>
                         <input
-                          type="text"
-                          name="icNumber"
-                          id="ic-number"
+                          type='text'
+                          name='icNumber'
+                          id='ic-number'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="email"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='email'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Email Address
                         </label>
                         <input
-                          type="text"
-                          name="email"
-                          id="email"
+                          type='text'
+                          name='email'
+                          id='email'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
@@ -339,19 +339,19 @@ function AgentAddDonor() {
 											/>
 										</div> */}
 
-                      <div className="col-span-6 sm:col-span-3">
+                      <div className='col-span-6 sm:col-span-3'>
                         <label
-                          htmlFor="contact-number"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='contact-number'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Contact Number
                         </label>
                         <input
-                          type="number"
-                          name="contactNumber"
-                          id="contact-number"
+                          type='number'
+                          name='contactNumber'
+                          id='contact-number'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
@@ -372,19 +372,19 @@ function AgentAddDonor() {
 											</select>
 										</div> */}
 
-                      <div className="col-span-6">
+                      <div className='col-span-6'>
                         <label
-                          htmlFor="home-address"
-                          className="block text-sm font-medium text-gray-700"
+                          htmlFor='home-address'
+                          className='block text-sm font-medium text-gray-700'
                         >
                           Home Address
                         </label>
                         <input
-                          type="text"
-                          name="address"
-                          id="home-address"
+                          type='text'
+                          name='address'
+                          id='home-address'
                           onChange={handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
 
@@ -436,10 +436,10 @@ function AgentAddDonor() {
                   </div>
                 )}
               </div>
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
                 <button
-                  type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  type='submit'
+                  className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   Add Donor
                 </button>

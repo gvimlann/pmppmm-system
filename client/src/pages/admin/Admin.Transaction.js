@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminRoute from "../../components/Admin.Route";
 import AdminTransactionTable from "../../components/admin/Admin.TransactionTable";
-import AdminPopupModal from "../../components/admin/Admin.PopupModal";
+import AdminTransactionPopupModal from "../../components/admin/Admin.TransactionPopupModal";
 
 export default function AdminTransaction() {
   const [transactionList, setTransactionList] = useState([]);
@@ -128,7 +128,7 @@ export default function AdminTransaction() {
         transactionApproved={transactionApproved}
         transactionRejected={transactionRejected}
       />
-      <AdminPopupModal
+      <AdminTransactionPopupModal
         title='Edit'
         content='Edit Data'
         successText='Submit'
