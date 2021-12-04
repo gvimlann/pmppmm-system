@@ -6,10 +6,9 @@ const prisma = new PrismaClient();
 export const agentRegister = async (req, res) => {
 	async function main() {
 		console.log('SERVER: REGISTER USER');
-		let { email, username, fullName, icNumber, password, contactNumber } =
-			req.body;
+		let { email, fullName, icNumber, password, contactNumber } = req.body;
 
-		const hashedPassword = hashPassword(password);
+		const hashedPassword = await hashPassword(password);
 		const userExist = await prisma.agent.findFirst({
 			where: {
 				AND: [
@@ -22,21 +21,25 @@ export const agentRegister = async (req, res) => {
 				],
 			},
 		});
+
 		if (userExist !== null) {
+			console.log(userExist);
 			return res.status(400).json({
 				success: false,
 				errorCode: 10001,
-				message: 'Agent already exists',
+				message:
+					'Agent already exists. Please login with your registered email',
 			});
 		}
 
 		const user = await prisma.agent.create({
-			email: email,
-			username: username,
-			fullName: fullName,
-			icNumber: icNumber,
-			contactNumber: contactNumber,
-			hashedPassword: hashedPassword,
+			data: {
+				email: email,
+				fullName: fullName,
+				icNumber: icNumber,
+				contactNumber: parseInt(contactNumber),
+				hashedPassword: hashedPassword,
+			},
 		});
 
 		return res.json({ success: true });
@@ -59,12 +62,19 @@ export const login = async (req, res) => {
 		if (!email) return res.status(400).send('Email is required');
 		if (!password) return res.status(400).send('Password is required');
 
-		console.log(await hashPassword(password));
+		// console.log(await hashPassword(password));
 
 		if (accountType === 'agent') {
 			const userExist = await prisma.agent.findFirst({
 				where: {
-					email: email,
+					AND: [
+						{
+							email: email,
+						},
+						{
+							approved: true,
+						},
+					],
 				},
 			});
 
@@ -94,7 +104,11 @@ export const login = async (req, res) => {
 				// secure: true, // only works on HTTPS connection
 			});
 
-			res.json({ success: true, role: 'AGENT' });
+			res.json({
+				role: 'AGENT',
+				id: userExist.id,
+				status: userExist.status,
+			});
 		} else if (accountType === 'admin') {
 			const userExist = await prisma.admin.findFirst({
 				where: {
@@ -121,7 +135,13 @@ export const login = async (req, res) => {
 				// secure: true, // only works on HTTPS connection
 			});
 
-			res.json({ success: true, role: 'ADMIN' });
+			console.log('userExist: ', userExist);
+
+			res.json({
+				role: 'ADMIN',
+				id: userExist.id,
+				status: userExist.status,
+			});
 		}
 	}
 
@@ -153,7 +173,7 @@ export const agentLogout = async (req, res) => {
 
 export const currentUser = async (req, res) => {
 	async function main() {
-		console.log(req.user);
+		// console.log(req.user);
 		const user = await prisma.agent.findFirst({
 			where: {
 				id: req.user.id,
@@ -162,7 +182,7 @@ export const currentUser = async (req, res) => {
 
 		return res.json({
 			success: true,
-			user: { id: req.user.id, status: user.status, role: 'AGENT' },
+			user: { id: req.user.id, status: user.status, role: req.user.role },
 		});
 	}
 

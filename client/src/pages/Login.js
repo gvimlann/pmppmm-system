@@ -4,12 +4,14 @@ import { useHistory } from 'react-router-dom';
 import { Context } from '../context';
 
 function Login() {
-	const { state } = useContext(Context);
+	const { state, dispatch } = useContext(Context);
 	const history = useHistory();
 
 	useEffect(() => {
 		if (state.user && state.user.role === 'AGENT') {
 			history.push('/agent/donor');
+		} else if (state.user && state.user.role === 'ADMIN') {
+			history.push('/admin/agent');
 		}
 	}, [state]);
 
@@ -29,9 +31,11 @@ function Login() {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post('/auth/login', formData);
-			console.log(data);
-			// console.log(res);
-			// window.localStorage.setItem('user', JSON.stringify(res.data));
+			console.log('login: ', data);
+			dispatch({
+				type: 'LOGIN',
+				payload: data,
+			});
 			if (data.role === 'ADMIN') {
 				history.push('/admin/agent');
 			} else if (data.role === 'AGENT') {
@@ -112,7 +116,7 @@ function Login() {
 								</div>
 							</div>
 							{error !== '' && (
-								<div className="mt-6 px-4 py-2 bg-red-200 rounded-md text-sm font-semibold">
+								<div className="mt-6 px-4 py-2 bg-red-200 rounded-md text-sm font-base">
 									{error}
 								</div>
 							)}

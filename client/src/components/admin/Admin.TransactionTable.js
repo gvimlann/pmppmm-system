@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function AdminTransactionTable({
 	transactionList,
 	openEditModal,
@@ -127,7 +129,8 @@ export default function AdminTransactionTable({
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-900">
-												{transaction.chequeDate}
+												{transaction.chequeDate &&
+													moment(transaction.chequeDate).format('DD/MM/YYYY')}
 											</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">

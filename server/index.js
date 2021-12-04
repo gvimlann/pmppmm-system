@@ -29,7 +29,7 @@ app.use(
 
 updateDB.start();
 
-readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
+readdirSync('./routes').map((r) => app.use('/', require(`./routes/${r}`)));
 
 app.listen(5001, () => {
 	console.log(`Listening on port 5001`);

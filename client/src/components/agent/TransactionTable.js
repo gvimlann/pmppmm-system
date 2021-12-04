@@ -1,5 +1,5 @@
+import moment from 'moment';
 export default function TransactionTable({ transactionList }) {
-	// const [donors] = useState([]);
 	return (
 		<div className="flex flex-col">
 			{/* {console.log(transactionList)} */}
@@ -64,6 +64,12 @@ export default function TransactionTable({ transactionList }) {
 										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Bank Name
 									</th>
+									<th
+										scope="col"
+										className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Download Doc
+									</th>
+
 									{/* <th scope="col" className="relative px-6 py-3">
 										<span className="sr-only">Edit</span>
 									</th> */}
@@ -116,7 +122,8 @@ export default function TransactionTable({ transactionList }) {
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-900">
-												{transaction.chequeDate}
+												{transaction.chequeDate &&
+													moment(transaction.chequeDate).format('DD/MM/YYYY')}
 											</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
@@ -127,6 +134,22 @@ export default function TransactionTable({ transactionList }) {
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-900">
 												{transaction.bankName}
+											</div>
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap text-sm font-medium cursor-pointer">
+											<div className="flex space-x-2">
+												<a
+													href={transaction.doc1Url}
+													target="_blank"
+													className="bg-green-50 p-2 text-xs text-green-600 hover:bg-green-100 rounded-md">
+													Medical List
+												</a>
+												<a
+													href={transaction.doc2Url}
+													target="_blank"
+													className="bg-red-50 p-2 text-xs text-red-600 hover:bg-red-100 rounded-md">
+													Tax Exemption
+												</a>
 											</div>
 										</td>
 										{/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

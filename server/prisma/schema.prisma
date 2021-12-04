@@ -68,6 +68,8 @@ model Transaction {
   bankName            String? @map(name: "bank_name")
   paymentType         Transaction_PaymentType? @map(name: "payment_type") 
   status              Transaction_Status @default(PENDING) @map(name: "status")
+  doc1Url             String? @map(name: "doc1_url")
+  doc2Url             String? @map(name: "doc2_url")
   donor               Donor @relation(fields: [donorId], references: [id])
   donorId             Int
   agent               Agent @relation(fields: [agentId], references: [id])
